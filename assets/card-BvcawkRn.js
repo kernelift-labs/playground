@@ -1,4 +1,4 @@
-import{a as e}from"./button-D0DtWiwF.js";import{D as t,I as n,O as r,T as i,U as a,V as o,h as s}from"./index-_Y7sQ1u4.js";var c={name:`Card`,extends:{name:`BaseCard`,extends:e,style:s.extend({name:`card`,style:`
+import{a as e}from"./button-BXhviTPa.js";import{D as t,I as n,O as r,T as i,U as a,V as o,h as s}from"./index-BMbfCFkc.js";var c={name:`Card`,extends:{name:`BaseCard`,extends:e,style:s.extend({name:`card`,style:`
     .p-card {
         background: dt('card.background');
         color: dt('card.color');
