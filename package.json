@@ -22,7 +22,7 @@
     "@kernelift/core": "^1.0.3",
     "@kernelift/i18n": "^1.0.2",
     "@kernelift/markdown": "^1.2.0",
-    "@kernelift/md-editor": "^1.1.0",
+    "@kernelift/md-editor": "^1.2.0",
     "@kernelift/utils": "^1.0.5",
     "@primeuix/themes": "^2.0.2",
     "@tailwindcss/typography": "^0.5.19",

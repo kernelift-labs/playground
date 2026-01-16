@@ -21,8 +21,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@kernelift/md-editor':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: ^1.2.0
+        version: 1.2.0(monaco-editor@0.55.1)
       '@kernelift/utils':
         specifier: ^1.0.5
         version: 1.0.5
@@ -366,8 +366,10 @@ packages:
   '@kernelift/markdown@1.2.0':
     resolution: {integrity: sha512-RtWp8CZBUtEg0/G5bLfto5LvVVgUWE64lzA9RJKEtAe+Sk3uzDk36u1KmyKqEJCJatiEKhXSUJRA9TqxfYnoSg==}
 
-  '@kernelift/md-editor@1.1.0':
-    resolution: {integrity: sha512-BVBcO1elGCgIgGVlH+8olS/WcA3EZFoVZxWXsarof44BwcvGmuktqaFED+SWjjAM7SHF40Knror9CrI2MSiDag==}
+  '@kernelift/md-editor@1.2.0':
+    resolution: {integrity: sha512-BiuRSJE1ko303efNaGD71/g7f/dVeuEoB4yhgiQWhUZ97xipaM+GOXAjpR956xw10kD62cFRA2HeWfGZc0WnEA==}
+    peerDependencies:
+      monaco-editor: ^0.54.0
 
   '@kernelift/utils@1.0.4':
     resolution: {integrity: sha512-6atfEyd/iis7ln18+hDfUQQlU2TwNClnSLHt3Nk3VlFTmbwxONImWrFlh+0+iL+QAtzU2XXg0eLHrRKdFLG/Jw==}
@@ -2384,7 +2386,7 @@ snapshots:
       lodash-es: 4.17.22
       markdown-it: 14.1.0
 
-  '@kernelift/md-editor@1.1.0':
+  '@kernelift/md-editor@1.2.0(monaco-editor@0.55.1)':
     dependencies:
       monaco-editor: 0.55.1
 
