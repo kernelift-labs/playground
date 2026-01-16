@@ -3,6 +3,47 @@
 @plugin "@tailwindcss/typography";
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --color-primary-50: #e6f0fa;
+  --color-primary-100: #b3d4f0;
+  --color-primary-200: #80b8e6;
+  --color-primary-300: #4d9bdc;
+  --color-primary-400: #2685d2;
+  --color-primary-500: #004493;
+  --color-primary-600: #003a7a;
+  --color-primary-700: #003061;
+  --color-primary-800: #002548;
+  --color-primary-900: #001b2f;
+  --color-primary-950: #001016;
+
+  --color-primary-dark-50: #e6f2fa;
+  --color-primary-dark-100: #b3daf0;
+  --color-primary-dark-200: #80c2e6;
+  --color-primary-dark-300: #4daadc;
+  --color-primary-dark-400: #2698d2;
+  --color-primary-dark-500: #055cc5;
+  --color-primary-dark-600: #044da4;
+  --color-primary-dark-700: #043e83;
+  --color-primary-dark-800: #032f62;
+  --color-primary-dark-900: #022041;
+  --color-primary-dark-950: #011120;
+}
+
+:root {
+  --bg-light: #ffffff;
+  --bg-dark: #1a1a1a;
+  --surface-light: #f5f5f5;
+  --surface-dark: #2a2a2a;
+}
+
+html {
+  background-color: var(--bg-light);
+}
+
+html.dark {
+  background-color: var(--bg-dark);
+}
+
 html,
 body,
 #app {

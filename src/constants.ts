@@ -10,8 +10,8 @@ export const SystemConfigs = {
     ? Number(import.meta.env.VITE_APP_API_TIMEOUT)
     : 15000,
   APP_DESCRIPTION: import.meta.env.VITE_APP_DESCRIPTION || 'Lifting core ideas',
-  APP_MOCK_ENABLE: import.meta.env.VITE_APP_MOCK_ENABLE === 'true',
-}
+  APP_MOCK_ENABLE: import.meta.env.VITE_APP_MOCK_ENABLE === 'true'
+};
 
 /**
  * @description 样式类名前缀
@@ -19,4 +19,5 @@ export const SystemConfigs = {
 export const StyleConfigs = {
   PREFIX: import.meta.env.VITE_APP_STYLE_PREFIX || '',
   PRIMARY_COLOR: import.meta.env.VITE_APP_STYLE_PRIMARY_COLOR || '#4F46E5',
-}
+  PRIMARY_COLOR_DARK: import.meta.env.VITE_APP_STYLE_PRIMARY_COLOR_DARK || '#055cc5'
+};

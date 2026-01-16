@@ -19,18 +19,24 @@ const goBack = () => {
     <Card class="max-w-2xl w-full shadow-lg">
       <template #header>
         <div
-          class="flex justify-center items-center py-8 bg-linear-to-br from-primary-50 to-primary-100"
+          class="flex justify-center items-center py-8 bg-linear-to-br from-primary-50 to-primary-100 dark:from-primary-950 dark:to-primary-900"
         >
           <div class="text-center">
-            <h1 class="text-9xl font-bold text-primary mb-2">404</h1>
+            <h1 class="text-9xl font-bold text-primary-600 dark:text-primary-400 mb-2">404</h1>
           </div>
         </div>
       </template>
       <template #content>
         <div class="text-center py-6">
-          <h2 class="text-3xl font-semibold text-surface-700 mb-3">页面未找到</h2>
-          <p class="text-lg text-surface-600 mb-2">抱歉，您访问的页面不存在。</p>
-          <p class="text-base text-surface-500">请检查 URL 是否正确，或返回浏览。</p>
+          <h2 class="text-3xl font-semibold text-surface-700 dark:text-surface-200 mb-3">
+            页面未找到
+          </h2>
+          <p class="text-lg text-surface-600 dark:text-surface-400 mb-2">
+            抱歉，您访问的页面不存在。
+          </p>
+          <p class="text-base text-surface-500 dark:text-surface-500">
+            请检查 URL 是否正确，或返回浏览。
+          </p>
         </div>
       </template>
       <template #footer>
@@ -60,5 +66,9 @@ const goBack = () => {
 .error-page {
   background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
   min-height: 100vh;
+}
+
+.dark .error-page {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
 }
 </style>

@@ -18,11 +18,11 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
-    "@kernelift/ai-chat": "^3.0.1",
-    "@kernelift/core": "^1.0.4",
+    "@kernelift/ai-chat": "^3.0.3",
+    "@kernelift/core": "^1.0.5",
     "@kernelift/i18n": "^1.0.2",
-    "@kernelift/markdown": "^1.2.0",
-    "@kernelift/md-editor": "^1.2.0",
+    "@kernelift/markdown": "^1.2.1",
+    "@kernelift/md-editor": "^1.2.1",
     "@kernelift/utils": "^1.0.5",
     "@primeuix/themes": "^2.0.2",
     "@tailwindcss/typography": "^0.5.19",

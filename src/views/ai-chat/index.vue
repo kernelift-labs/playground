@@ -158,7 +158,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-full h-full relative">
+  <div class="w-full h-full relative ai-chat-view">
     <ChatContainer
       v-model="userQuestion"
       v-model:loading="senderLoading"
@@ -166,7 +166,7 @@ onMounted(() => {
       v-model:record-id="activeRecordId"
       :records="chatRecords"
       :is-generate-loading="generateLoading"
-      primary-color="#46139b"
+      :primary-color="themeMode === 'dark' ? '#42ab52' : '#7624fe'"
       :show-workspace="showWorkspace"
       :markdown-class-name="`prose ${themeMode === 'dark' ? 'prose-invert' : ''}`"
       :has-sender-tools="true"
@@ -187,13 +187,23 @@ onMounted(() => {
     >
       <template #logo>
         <div class="mt-2 mb-3">
-          <img src="./logo.avif" alt="logo" style="width: 7.5rem; height: 1.1rem" />
+          <img
+            src="./logo.avif"
+            alt="logo"
+            style="width: 7.5rem; height: 1.1rem"
+            :style="themeMode === 'dark' ? { filter: 'invert(1)' } : {}"
+          />
         </div>
       </template>
 
       <template #header-logo>
         <div class="mx-2">
-          <img src="./logo.avif" alt="header-logo" style="width: 8.8rem; height: 1.3rem" />
+          <img
+            src="./logo.avif"
+            alt="header-logo"
+            style="width: 8.8rem; height: 1.3rem"
+            :style="themeMode === 'dark' ? { filter: 'invert(1)' } : {}"
+          />
         </div>
       </template>
 
@@ -233,7 +243,8 @@ onMounted(() => {
       <template #sender-textarea="{ height, execute }">
         <Textarea
           v-model="userQuestion"
-          class="w-full"
+          class="w-full sender-textarea"
+          :class="{ 'dark-textarea': themeMode === 'dark' }"
           :style="{
             height: height + 'px',
             resize: 'none',
@@ -248,8 +259,14 @@ onMounted(() => {
 
       <template #empty>
         <div class="flex items-center justify-center flex-col">
-          <img src="./logo.avif" alt="header-logo" style="width: 10rem" />
-          <div class="p-4 text-center text-surface-600">
+          <img
+            src="./logo.avif"
+            alt="header-logo"
+            :style="
+              themeMode === 'dark' ? { width: '10rem', filter: 'invert(1)' } : { width: '10rem' }
+            "
+          />
+          <div class="p-4 text-center text-surface-600 dark:text-gray-300">
             本工程基于硅基流动API进行开发，提供智能对话服务，支持多种模型选择与个性化配置。
           </div>
         </div>
@@ -280,8 +297,10 @@ onMounted(() => {
               filter
               placeholder="选择模型"
               style="border-radius: 0.9rem"
+              :class="{ 'dark-select': themeMode === 'dark' }"
               :loading="isLoadingModels"
               :disabled="senderLoading"
+              append-to=".ai-chat-view"
               overlay-class="text-sm small-dropdown"
               @change="changeModel($event.value)"
             />
@@ -322,50 +341,50 @@ onMounted(() => {
       </template>
 
       <template #workspace="{ record: activeRecord }">
-        <div class="p-4 h-full overflow-auto">
+        <div class="p-4 h-full overflow-auto" :class="{ 'dark-workspace': themeMode === 'dark' }">
           <div v-if="activeRecord" class="space-y-4">
-            <div class="border-b border-gray-300 pb-4">
+            <div class="workspace-divider pb-4">
               <h3 class="text-lg font-semibold mb-2">会话信息</h3>
             </div>
 
             <div class="space-y-3">
               <div>
-                <label class="text-sm font-medium text-surface-600">会话名称</label>
-                <p class="mt-1 text-surface-900">{{ activeRecord.name }}</p>
+                <label class="text-sm font-medium workspace-label">会话名称</label>
+                <p class="mt-1 workspace-text">{{ activeRecord.name }}</p>
               </div>
 
               <div>
-                <label class="text-sm font-medium text-surface-600">创建时间</label>
-                <p class="mt-1 text-surface-900">{{ activeRecord.createTime }}</p>
+                <label class="text-sm font-medium workspace-label">创建时间</label>
+                <p class="mt-1 workspace-text">{{ activeRecord.createTime }}</p>
               </div>
 
               <div>
-                <label class="text-sm font-medium text-surface-600">会话ID</label>
-                <p class="mt-1 text-surface-900 text-xs font-mono">{{ activeRecord.id }}</p>
+                <label class="text-sm font-medium workspace-label">会话ID</label>
+                <p class="mt-1 workspace-text text-xs font-mono">{{ activeRecord.id }}</p>
               </div>
 
               <div>
-                <label class="text-sm font-medium text-surface-600">消息数量</label>
-                <p class="mt-1 text-surface-900">{{ chatMessages.length }} 条消息</p>
+                <label class="text-sm font-medium workspace-label">消息数量</label>
+                <p class="mt-1 workspace-text">{{ chatMessages.length }} 条消息</p>
               </div>
 
               <div v-if="activeRecord.extraData">
-                <label class="text-sm font-medium text-surface-600">首条消息</label>
-                <p class="mt-1 text-surface-900 text-sm">{{ activeRecord.content }}</p>
+                <label class="text-sm font-medium workspace-label">首条消息</label>
+                <p class="mt-1 workspace-text text-sm">{{ activeRecord.content }}</p>
               </div>
             </div>
 
-            <div class="border-t border-gray-300 pt-4 mt-4">
+            <div class="workspace-divider pt-4 mt-4">
               <h4 class="text-sm font-semibold mb-2">会话统计</h4>
               <div class="grid grid-cols-2 gap-3">
-                <div class="bg-surface-50 p-3 rounded border border-gray-300">
-                  <div class="text-xs text-surface-600">用户消息</div>
+                <div class="workspace-card p-3 rounded">
+                  <div class="text-xs workspace-label">用户消息</div>
                   <div class="text-lg font-semibold">
                     {{ chatMessages.filter((m) => m.role === 'user').length }}
                   </div>
                 </div>
-                <div class="bg-surface-50 p-3 rounded border border-gray-300">
-                  <div class="text-xs text-surface-600">AI回复</div>
+                <div class="workspace-card p-3 rounded">
+                  <div class="text-xs workspace-label">AI回复</div>
                   <div class="text-lg font-semibold">
                     {{ chatMessages.filter((m) => m.role === 'assistant').length }}
                   </div>
@@ -444,15 +463,15 @@ onMounted(() => {
     >
       <div class="flex flex-col gap-3">
         <div>
-          <label class="text-sm font-medium text-surface-600">消息ID</label>
+          <label class="text-sm font-medium text-surface-600 dark:text-surface-400">消息ID</label>
           <div
-            class="mt-1 p-2 bg-surface-50 rounded text-xs font-mono break-all border border-surface-200"
+            class="mt-1 p-2 bg-surface-50 dark:bg-surface-700 rounded text-xs font-mono break-all border border-surface-200"
           >
             {{ messageDetail.id }}
           </div>
         </div>
         <div>
-          <label class="text-sm font-medium text-surface-600">角色</label>
+          <label class="text-sm font-medium text-surface-600 dark:text-surface-400">角色</label>
           <div class="mt-1">
             <span
               :class="{
@@ -466,19 +485,21 @@ onMounted(() => {
           </div>
         </div>
         <div>
-          <label class="text-sm font-medium text-surface-600">发送时间</label>
-          <div class="mt-1 text-sm text-surface-900">
+          <label class="text-sm font-medium text-surface-600 dark:text-surface-400">发送时间</label>
+          <div class="mt-1 text-sm text-surface-900 dark:text-surface-300">
             {{ new Date(messageDetail.timestamp).toLocaleString() }}
           </div>
         </div>
         <div>
-          <label class="text-sm font-medium text-surface-600">内容统计</label>
-          <div class="mt-1 text-sm text-surface-900">{{ messageDetail.content.length }} 字符</div>
+          <label class="text-sm font-medium text-surface-600 dark:text-surface-400">内容统计</label>
+          <div class="mt-1 text-sm text-surface-900 dark:text-surface-300">
+            {{ messageDetail.content.length }} 字符
+          </div>
         </div>
         <div v-if="messageDetail.extraData && Object.keys(messageDetail.extraData).length > 0">
-          <label class="text-sm font-medium text-surface-600">元数据</label>
+          <label class="text-sm font-medium text-surface-600 dark:text-surface-400">元数据</label>
           <pre
-            class="mt-1 text-xs bg-surface-50 p-2 rounded overflow-auto border border-surface-200 max-h-40"
+            class="mt-1 text-xs bg-surface-50 dark:bg-surface-700 p-2 rounded overflow-auto border border-surface-200 max-h-40"
             >{{ JSON.stringify(messageDetail.extraData, null, 2) }}</pre
           >
         </div>
@@ -625,7 +646,6 @@ onMounted(() => {
 </style>
 
 <style>
-/* Override PrimeVue primary color for this page */
 :root {
   --p-primary-50: #f5f3ff;
   --p-primary-100: #ede9fe;
@@ -638,6 +658,70 @@ onMounted(() => {
   --p-primary-800: #4c1d95;
   --p-primary-900: #3b1a7a;
   --p-primary-950: #2e1065;
+}
+
+html.dark {
+  --p-primary-50: #e8f5ea;
+  --p-primary-100: #c6e6ca;
+  --p-primary-200: #a0d6a8;
+  --p-primary-300: #79c686;
+  --p-primary-400: #5eb96c;
+  --p-primary-500: #42ab52;
+  --p-primary-600: #3c9d4b;
+  --p-primary-700: #338a41;
+  --p-primary-800: #2b7837;
+  --p-primary-900: #1d5825;
+  --p-primary-950: #0f2f14;
+}
+
+/* Dark mode styles for textarea */
+.dark-textarea {
+  background-color: #4a4a4a !important;
+  color: #ffffff !important;
+}
+
+/* Dark mode styles for select */
+.dark-select {
+  background-color: #4a4a4a !important;
+  color: #ffffff !important;
+}
+
+/* Dark mode workspace styles */
+.dark-workspace {
+  .workspace-label {
+    color: #9ca3af !important;
+  }
+
+  .workspace-text {
+    color: #e5e7eb !important;
+  }
+
+  .workspace-divider {
+    border-color: #4a4a4a !important;
+  }
+
+  .workspace-card {
+    background-color: #3a3a3a !important;
+    border: 1px solid #4a4a4a !important;
+  }
+}
+
+.workspace-divider {
+  border-bottom: 1px solid #e5e7eb;
+  border-top: 1px solid #e5e7eb;
+}
+
+.workspace-label {
+  color: #6b7280;
+}
+
+.workspace-text {
+  color: #111827;
+}
+
+.workspace-card {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
 }
 
 .small-dropdown {

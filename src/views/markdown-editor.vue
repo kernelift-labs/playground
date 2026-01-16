@@ -4,6 +4,8 @@ import { MdEditor } from '@kernelift/md-editor';
 import '@kernelift/md-editor/style.css';
 import { MdRender } from '@kernelift/markdown';
 import '@kernelift/markdown/style.css';
+import Button from 'primevue/button';
+import { useTheme } from '@kernelift/core';
 
 defineOptions({
   name: 'MarkdownEditPage'
@@ -57,8 +59,8 @@ const viewMode = ref<'split' | 'edit' | 'preview'>('split');
 const isMobile = ref(false);
 const isFullscreen = ref(false);
 
-// Theme
-const isDark = ref(false);
+// Theme from @kernelift/core
+const { isDark, setTheme } = useTheme();
 
 // Check if mobile on mount and resize
 const checkMobile = () => {
@@ -91,7 +93,7 @@ const toggleFullscreen = () => {
 
 // Toggle theme
 const toggleTheme = () => {
-  isDark.value = !isDark.value;
+  setTheme(isDark.value ? 'light' : 'dark');
 };
 
 // Export markdown
@@ -123,63 +125,76 @@ const handleCopy = (code: string) => {
       <div class="md-toolbar__center">
         <!-- View Mode Switcher (Hidden on mobile) -->
         <div v-if="!isMobile" class="md-view-switcher">
-          <button
+          <Button
             :class="{ active: viewMode === 'edit' }"
             @click="viewMode = 'edit'"
             title="Edit Only"
+            text
           >
-            <span class="material-symbols--edit-square"></span>
+            <i class="pi pi-pencil"></i>
             <span class="label">Edit</span>
-          </button>
-          <button
+          </Button>
+          <Button
             :class="{ active: viewMode === 'split' }"
             @click="viewMode = 'split'"
             title="Split View"
+            text
           >
-            <span class="material-symbols--view-column-2"></span>
+            <i class="pi pi-window-maximize"></i>
             <span class="label">Split</span>
-          </button>
-          <button
+          </Button>
+          <Button
             :class="{ active: viewMode === 'preview' }"
             @click="viewMode = 'preview'"
             title="Preview Only"
+            text
           >
-            <span class="material-symbols--preview"></span>
+            <i class="pi pi-eye"></i>
             <span class="label">Preview</span>
-          </button>
+          </Button>
         </div>
 
         <!-- Mobile View Switcher -->
         <div v-else class="md-view-switcher mobile">
-          <button :class="{ active: viewMode === 'edit' }" @click="viewMode = 'edit'">
-            <span class="material-symbols--edit-square"></span>
-          </button>
-          <button :class="{ active: viewMode === 'preview' }" @click="viewMode = 'preview'">
-            <span class="material-symbols--preview"></span>
-          </button>
+          <Button :class="{ active: viewMode === 'edit' }" @click="viewMode = 'edit'" text>
+            <i class="pi pi-pencil"></i>
+          </Button>
+          <Button :class="{ active: viewMode === 'preview' }" @click="viewMode = 'preview'" text>
+            <i class="pi pi-eye"></i>
+          </Button>
         </div>
       </div>
 
       <div class="md-toolbar__right">
-        <button
+        <Button
           class="md-toolbar__btn"
           @click="toggleTheme"
           :title="isDark ? 'Light Mode' : 'Dark Mode'"
+          text
+          rounded
         >
-          <span v-if="isDark" class="material-symbols--light-mode"></span>
-          <span v-else class="material-symbols--dark-mode"></span>
-        </button>
-        <button class="md-toolbar__btn" @click="exportMarkdown" title="Export Markdown">
-          <span class="material-symbols--download"></span>
-        </button>
-        <button
+          <i v-if="isDark" class="pi pi-sun"></i>
+          <i v-else class="pi pi-moon"></i>
+        </Button>
+        <Button
+          class="md-toolbar__btn"
+          @click="exportMarkdown"
+          title="Export Markdown"
+          text
+          rounded
+        >
+          <i class="pi pi-download"></i>
+        </Button>
+        <Button
           class="md-toolbar__btn"
           @click="toggleFullscreen"
           :title="isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'"
+          text
+          rounded
         >
-          <span v-if="isFullscreen" class="material-symbols--close-fullscreen"></span>
-          <span v-else class="material-symbols--fullscreen"></span>
-        </button>
+          <i v-if="isFullscreen" class="pi pi-window-minimize"></i>
+          <i v-else class="pi pi-window-maximize"></i>
+        </Button>
       </div>
     </div>
 
@@ -189,7 +204,7 @@ const handleCopy = (code: string) => {
       <div v-show="viewMode === 'edit' || viewMode === 'split'" class="md-panel md-panel--editor">
         <div class="md-panel__header">
           <span class="md-panel__title">
-            <span class="material-symbols--edit-document"></span>
+            <i class="pi pi-file-edit"></i>
             Editor
           </span>
           <span class="md-panel__info">{{ content.length }} characters</span>
@@ -216,7 +231,7 @@ const handleCopy = (code: string) => {
       >
         <div class="md-panel__header">
           <span class="md-panel__title">
-            <span class="material-symbols--visibility"></span>
+            <i class="pi pi-eye"></i>
             Preview
           </span>
         </div>
@@ -226,7 +241,7 @@ const handleCopy = (code: string) => {
               v-model="content"
               :incremental="true"
               :on-copy="handleCopy"
-              class="prose"
+              :class="['prose', { 'prose-invert': isDark }]"
               :theme-mode="isDark ? 'dark' : 'light'"
             />
           </div>
@@ -300,36 +315,7 @@ const handleCopy = (code: string) => {
   }
 
   &__btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    background: transparent;
-    border: none;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    color: #6b7280;
-    transition: all 0.2s;
-
-    &:hover {
-      background: #f3f4f6;
-      color: #1f2937;
-    }
-
-    &:active {
-      transform: scale(0.95);
-    }
-
-    .is-dark & {
-      color: #9ca3af;
-
-      &:hover {
-        background: #404040;
-        color: #f3f4f6;
-      }
-    }
-
-    span {
+    i {
       font-size: 1.25rem;
     }
   }
@@ -347,32 +333,14 @@ const handleCopy = (code: string) => {
     background: #404040;
   }
 
-  button {
+  .p-button {
     display: flex;
     align-items: center;
     gap: 0.375rem;
     padding: 0.5rem 1rem;
-    background: transparent;
-    border: none;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    color: #6b7280;
     font-size: 0.875rem;
     font-weight: 500;
-    transition: all 0.2s;
     white-space: nowrap;
-
-    .is-dark & {
-      color: #9ca3af;
-    }
-
-    &:hover {
-      color: #1f2937;
-
-      .is-dark & {
-        color: #f3f4f6;
-      }
-    }
 
     &.active {
       background: white;
@@ -385,7 +353,7 @@ const handleCopy = (code: string) => {
       }
     }
 
-    span {
+    i {
       font-size: 1.125rem;
     }
 
@@ -394,7 +362,7 @@ const handleCopy = (code: string) => {
     }
   }
 
-  &.mobile button {
+  &.mobile .p-button {
     padding: 0.5rem;
 
     .label {
@@ -466,7 +434,7 @@ const handleCopy = (code: string) => {
       color: #d1d5db;
     }
 
-    span {
+    i {
       font-size: 1.125rem;
     }
   }
@@ -527,7 +495,7 @@ const handleCopy = (code: string) => {
       font-size: 1rem;
     }
 
-    &__btn span {
+    &__btn i {
       font-size: 1.125rem;
     }
   }
@@ -555,11 +523,11 @@ const handleCopy = (code: string) => {
 }
 
 @media (max-width: 480px) {
-  .md-view-switcher button {
+  .md-view-switcher .p-button {
     padding: 0.375rem 0.5rem;
     font-size: 0.75rem;
 
-    span {
+    i {
       font-size: 1rem;
     }
   }

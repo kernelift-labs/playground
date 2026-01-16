@@ -45,12 +45,14 @@ function navigateTo(path: string) {
 </script>
 
 <template>
-  <div class="min-h-screen bg-surface-50 py-8 px-4 sm:px-6 lg:px-8">
+  <div class="min-h-screen bg-surface-50 dark:bg-surface-900 py-8 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto">
       <!-- Header -->
       <div class="text-center mb-12">
-        <h1 class="text-4xl sm:text-5xl font-bold text-surface-900 mb-4">Kernelift Playground</h1>
-        <p class="text-lg text-surface-600 max-w-2xl mx-auto">
+        <h1 class="text-4xl sm:text-5xl font-bold text-surface-900 dark:text-surface-50 mb-4">
+          Kernelift Playground
+        </h1>
+        <p class="text-lg text-surface-600 dark:text-surface-400 max-w-2xl mx-auto">
           探索各种工具和功能，选择一个应用开始使用
         </p>
       </div>
@@ -65,13 +67,15 @@ function navigateTo(path: string) {
         >
           <template #header>
             <div class="flex items-center justify-center pt-8 pb-4">
-              <div class="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center">
-                <i :class="route.icon" class="text-3xl text-primary-600"></i>
+              <div
+                class="w-16 h-16 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center"
+              >
+                <i :class="route.icon" class="text-3xl text-primary-600 dark:text-primary-400"></i>
               </div>
             </div>
           </template>
           <template #title>
-            <div class="text-center text-xl font-semibold text-surface-900">
+            <div class="text-center text-xl font-semibold text-surface-900 dark:text-surface-50">
               {{ route.title }}
             </div>
           </template>
@@ -90,13 +94,14 @@ function navigateTo(path: string) {
       </div>
 
       <!-- Footer -->
-      <div class="text-center mt-16 text-surface-500 text-sm">
+      <div class="text-center mt-16 text-surface-500 dark:text-surface-400 text-sm">
         <p>
           © 2026 Kernelift Playground.
           <a
             href="https://github.com/kernelift-labs/playground"
             target="_blank"
             rel="noopener noreferrer"
+            class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300"
             >Github Site</a
           >.
         </p>

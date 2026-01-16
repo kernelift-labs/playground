@@ -12,6 +12,7 @@ import { OpenAI } from 'openai/client';
 import type { ChatCompletionCreateParamsStreaming } from 'openai/resources/chat/completions/completions.mjs';
 import { computed, onUnmounted, ref, shallowRef } from 'vue';
 import { getModelList } from './api';
+import { useTheme } from '@kernelift/core';
 
 interface ChatError {
   message: string;
@@ -61,7 +62,7 @@ export const useChat = (options: {
   // 聊天模型
   const chatModel = ref(model || 'deepseek-ai/DeepSeek-V3.1-Terminus');
   // 主题模式
-  const themeMode = ref<'light' | 'dark'>('light');
+  const { theme: themeMode } = useTheme();
 
   /**
    * @description 切换主题模式
