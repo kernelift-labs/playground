@@ -91,7 +91,15 @@ function navigateTo(path: string) {
 
       <!-- Footer -->
       <div class="text-center mt-16 text-surface-500 text-sm">
-        <p>© 2026 Kernelift Playground. Built with Vue 3 & PrimeVue.</p>
+        <p>
+          © 2026 Kernelift Playground.
+          <a
+            href="https://github.com/kernelift-labs/playground"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Github Site</a
+          >.
+        </p>
       </div>
     </div>
   </div>
