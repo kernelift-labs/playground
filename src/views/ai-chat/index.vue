@@ -625,6 +625,21 @@ onMounted(() => {
 </style>
 
 <style>
+/* Override PrimeVue primary color for this page */
+:root {
+  --p-primary-50: #f5f3ff;
+  --p-primary-100: #ede9fe;
+  --p-primary-200: #ddd6fe;
+  --p-primary-300: #c4b5fd;
+  --p-primary-400: #a78bfa;
+  --p-primary-500: #7624fe;
+  --p-primary-600: #6b21d8;
+  --p-primary-700: #5b21b6;
+  --p-primary-800: #4c1d95;
+  --p-primary-900: #3b1a7a;
+  --p-primary-950: #2e1065;
+}
+
 .small-dropdown {
   border-radius: 1rem !important;
   overflow: hidden;
