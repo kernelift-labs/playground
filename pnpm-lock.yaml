@@ -12,8 +12,8 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1(@kernelift/markdown@1.2.0)(vue@3.5.26(typescript@5.9.3))
       '@kernelift/core':
-        specifier: ^1.0.3
-        version: 1.0.3(axios@1.13.2)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3)))(vue-router@4.6.4(vue@3.5.26(typescript@5.9.3)))(vue@3.5.26(typescript@5.9.3))
+        specifier: ^1.0.4
+        version: 1.0.4(axios@1.13.2)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3)))(vue-router@4.6.4(vue@3.5.26(typescript@5.9.3)))(vue@3.5.26(typescript@5.9.3))
       '@kernelift/i18n':
         specifier: ^1.0.2
         version: 1.0.2
@@ -353,8 +353,8 @@ packages:
       '@kernelift/markdown':
         optional: true
 
-  '@kernelift/core@1.0.3':
-    resolution: {integrity: sha512-0NjmVGbT2gT8jHBTZdukwFla2SYnUhsJki2icCfgb74HWOP2CHAR66x/Eqt9WWJ/lJBnzCqDCrzviFn0tUSaxQ==}
+  '@kernelift/core@1.0.4':
+    resolution: {integrity: sha512-eKe7B26mEuroj4q3asaHG7MvOy9wuNzfxOXGYjKXy8R1eMz/tTj27sCN5rDDUawEcGo0y19UgwJU3VntVOtdmA==}
     peerDependencies:
       axios: ^1.12.2
       pinia: ^3.0.3
@@ -2367,7 +2367,7 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  '@kernelift/core@1.0.3(axios@1.13.2)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3)))(vue-router@4.6.4(vue@3.5.26(typescript@5.9.3)))(vue@3.5.26(typescript@5.9.3))':
+  '@kernelift/core@1.0.4(axios@1.13.2)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3)))(vue-router@4.6.4(vue@3.5.26(typescript@5.9.3)))(vue@3.5.26(typescript@5.9.3))':
     dependencies:
       '@kernelift/i18n': 1.0.2
       '@vueuse/core': 14.1.0(vue@3.5.26(typescript@5.9.3))

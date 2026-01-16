@@ -20,6 +20,7 @@ export function initApp() {
   const app = createApp(App);
   const result = initKernelift(app, {
     routes: routes,
+    routerMode: 'hash',
     system: {
       info: {
         name: SystemConfigs.APP_NAME,

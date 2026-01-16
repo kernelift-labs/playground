@@ -16,6 +16,12 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))
       }
+    },
+    build: {
+      // 确保输出目录正确
+      outDir: 'dist',
+      // 生成源映射，便于调试
+      sourcemap: false
     }
   };
 });

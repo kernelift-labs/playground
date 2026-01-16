@@ -4,20 +4,11 @@
     <meta charset="utf-8" />
     <title>Redirecting...</title>
     <script>
-      // 获取当前路径
-      const path = window.location.pathname;
-      const query = window.location.search;
-      const hash = window.location.hash;
-
-      // 重定向到 index.html 并保留路径
-      window.location.href =
-        '/playground/index.html' + (path.replace('/playground/', '/') || '') + query + hash;
+      // 简单的重定向到首页
+      window.location.replace('/playground/');
     </script>
-    <noscript>
-      <meta http-equiv="refresh" content="0;url=/playground/" />
-    </noscript>
   </head>
   <body>
-    <p>Redirecting...</p>
+    <p>Redirecting to homepage...</p>
   </body>
 </html>
