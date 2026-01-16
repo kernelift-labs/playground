@@ -1,0 +1,3 @@
+onlyBuiltDependencies:
+  - '@kernelift/i18n'
+  - '@parcel/watcher'

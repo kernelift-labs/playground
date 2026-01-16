@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+@plugin "tailwindcss-primeui";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+
+html,
+body,
+#app {
+  @apply h-full w-full relative p-0 m-0 overflow-hidden;
+}
